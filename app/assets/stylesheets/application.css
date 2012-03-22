@@ -1,0 +1,209 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+/*--------*/
+/* Layout */
+/*--------*/
+body {
+  max-width: 500px;
+}
+/* Pattern for middle vertical alignment */
+.vertical-align-container {
+  display: table;
+  height: 100%;
+}
+.vertical-align {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/*-------*/
+/* Login */
+/*-------*/
+#login-container {
+  margin: 30px auto 100px;
+  width: 80%;
+}
+#login-container h1 {
+  font-size: 3em;
+}
+#login-container input {
+  height: 40px;
+}
+#login-container button {
+  margin-bottom: 10px;
+}
+
+/*------------*/
+/* Navigation */
+/*------------*/
+#custom-nav {
+  margin: 0;
+}
+#custom-nav li {
+  display: inline-block;
+}
+#custom-nav li:last-child {
+  float: right;
+}
+#custom-nav a {
+  font-weight: bold;
+  margin: 3px 0 4px;
+}
+
+/*-------*/
+/* Index */
+/*-------*/
+#content {
+  overflow: hidden;
+}
+#search-field {
+  width: 208px;
+}
+article {
+  position: relative;
+}
+.swiped-container {
+  background-color: #F5F5F5;
+  display: none;
+  height: 80%;
+  padding: 0 10px;
+  position: absolute;
+  right: 0;
+  top: 10%;
+  width: 140px;
+}
+.swiped-container.active {
+  display: block;
+}
+#to-paginate {
+  display: none;
+}
+
+/*------------*/
+/* Pagination */
+/*------------*/
+#pagination-container {
+  text-align: center;
+}
+#pagination {
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, .05);
+  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, .05);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, .05);
+  display: inline-block;
+}
+#pagination :first-child {
+  border-left-width: 1px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-radius: 3px 0px 0px 3px;
+  border-radius: 3px 0px 0px 3px;
+}
+#pagination :last-child {
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 0px 3px 3px 0px;
+  border-radius: 0px 3px 3px 0px;
+}
+#pagination a, #pagination span, #pagination em {
+  border: 1px solid #ddd;
+  border-left-width: 0;
+  float: left;
+  height: 32px;
+  line-height: 31px;
+  width: 32px;
+}
+#pagination :first-child, #pagination :last-child, #pagination em {
+  padding: 0 1px;
+}
+#pagination a:hover, #pagination em {
+  background-color: whiteSmoke;
+  text-decoration: none;
+}
+
+/*-----------*/
+/* New tweet */
+/*-----------*/
+#tweet-field {
+  padding: 8px;
+  margin-top: 8px;
+}
+#hash-tag-field {
+  width: 210px;
+}
+#char-count {
+  float: right;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+/*------------*/
+/* Edit tweet */
+/*------------*/
+#clear-hash-tag-btn {
+  left: 261px;
+  position: absolute;
+}
+#timestamp-container h4 {
+  margin: 10px 0;
+}
+input[type=date] {
+  margin-right: 4px;
+  width: 120px;
+}
+input[type=time] {
+  width: 93px;
+}
+@media only screen and (max-device-width: 480px) {
+  input[type=date], input[type=time] {
+    height: 30px;
+  }
+}
+
+/*------------*/
+/* Show tweet */
+/*------------*/
+#slider.well {
+  padding: 0;
+}
+#slider ul {
+  margin: 0;
+}
+#slider li {
+  height: 100px;
+}
+#slider .vertical-align {
+  padding: 16px;
+}
+#position {
+  font-size: 27px;
+  margin: 16px 0 0 0;
+  text-align: center;
+}
+#position li {
+  color: #ccc;
+  display: inline-block;
+}
+#position li.active {
+  color: #333;
+}
+
+/*--------*/
+/* Footer */
+/*--------*/
+#quote {
+  font-size: 14px;
+}
+#author {
+  float: right;
+  padding-right: 20px;
+}

@@ -1,0 +1,13 @@
+- content_for :navbar do
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container-fluid
+        %ul#custom-nav
+          %li
+            %a#home-button.btn.btn-inverse{href: root_path, 'data-pjax' => 'true'} Home
+          %li
+            %a.btn.btn-inverse{href: new_tweet_path, 'data-pjax' => 'true'} Add new
+          %li
+            %a.btn.btn-inverse{href: logout_path, 'data-pjax' => 'true', rel: 'nofollow'} Logout
+
+= render template: 'layouts/application'

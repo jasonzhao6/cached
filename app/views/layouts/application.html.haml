@@ -1,0 +1,27 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %title Recap
+    %meta{:content => "True", :name => "HandheldFriendly"}
+    %meta{:content => "320", :name => "MobileOptimized"}
+    %meta{:content => "telephone=no", :name => "format-detection"}
+    %meta{:content => "width=device-width, minimum-scale=1.0, maximum-scale=1.0", :name => "viewport"}
+    %meta{:content => "on", "http-equiv" => "cleartype"}
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}
+    %meta{:content => "black", :name => "apple-mobile-web-app-status-bar-style"}
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", :media => "all"
+    / %link{:href => "images/favicon.ico", :rel => "shortcut icon"}
+    / %link{:href => "images/apple-touch-icon.png", :rel => "apple-touch-icon"}
+    / %link{:href => "images/apple-touch-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72"}
+    / %link{:href => "images/apple-touch-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114"}
+  %body
+    = yield :navbar
+    .container-fluid
+      .row-fluid
+        #content
+          = yield
+        #to-paginate
+    = javascript_include_tag "application"
+    = yield :page_specific_javascript
