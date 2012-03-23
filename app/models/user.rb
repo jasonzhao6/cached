@@ -9,8 +9,7 @@ end
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-  has_many :tweets
-  has_many :hash_tags
+  has_many :articles
   
   # users.password_hash in the database is a :string
   include BCrypt
