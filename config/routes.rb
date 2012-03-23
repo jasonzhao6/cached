@@ -1,9 +1,8 @@
 TwitterClone::Application.routes.draw do
 
-  root :to => 'tweets#index'
-  get 'quote' => 'tweets#quote'
-  resources :tweets do
-    get :reply
+  root :to => 'articles#index'
+  resources :articles do
+    # get :related TODO implement vector based document matching algorithm
   end
 
   get 'login' => 'sessions#login'
