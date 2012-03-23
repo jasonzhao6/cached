@@ -7,9 +7,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require jquery.pjax
-//= require swipesense
-//= require swipe
 //= require_tree .
 
 // Pjax anchor binding

@@ -26,16 +26,9 @@ class ArticlesController < ApplicationController
   def index
     query = params[:q].try(:downcase)
     if query.blank?
-      @tweets = Tweet.of(current_user).paginate(page: params[:page])
+      @articles = Article.of(current_user).paginate(page: params[:page])
     else
-      if query[0] == '#'
-        @tweets = Tweet.of(current_user).where('LOWER(hash_tags.hash_tag) = ?', query[1..-1]).paginate(page: params[:page])
-        if @tweets.length == 0
-          @tweets = Tweet.of(current_user).where('LOWER(hash_tags.hash_tag) like ?', "%#{query[1..-1]}%").paginate(page: params[:page])
-        end
-      else
-        @tweets = Tweet.of(current_user).where('LOWER(tweet) like ?', "%#{query}%").paginate(page: params[:page])
-      end
+      @articles = Article.of(current_user).where('LOWER(title) like ?', "%#{query}%").paginate(page: params[:page])
     end
   end
   
