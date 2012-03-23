@@ -3,10 +3,4 @@
   .form-actions
     = render partial: 'delete_cancel_save_buttons', locals: {tweet: nil, show_delete: false}
   %footer
-    %p#quote
-- if !@pjax
-  - content_for :page_specific_javascript do
-    :javascript
-      $(function() {
-        getQuote();
-      });
+    %p#related

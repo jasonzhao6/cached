@@ -16,9 +16,3 @@
 %input{id: 'start-index', value: "#{@start_index}", type: 'hidden'}
 .form-actions
   = render partial: 'back_reply_edit_buttons', locals: {tweet: @tweets[@start_index]}
-- if !@pjax
-  - content_for :page_specific_javascript do
-    :javascript
-      $(function() {
-        gallerySetup();
-      });
