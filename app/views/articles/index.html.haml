@@ -9,7 +9,7 @@
         = render partial: 'tweet_and_hash_tag', locals: {tweet: tweet}
         - if tweet.related_count > 1
           \-
-          %a{href: tweet_path(tweet, q: params[:q], page: params[:page]), 'data-pjax' => 'true'}= "#{tweet.related_count - 1} related"
+          %a{href: tweet_path(tweet, q: params[:q], page: params[:page])}= "#{tweet.related_count - 1} related"
         .swiped-container{id: "swiped-#{tweet.id}"}
           .vertical-align-container
             .vertical-align
