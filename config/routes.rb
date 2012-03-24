@@ -1,4 +1,4 @@
-TwitterClone::Application.routes.draw do
+EvernoteClone::Application.routes.draw do
 
   root :to => 'articles#index'
   resources :articles do

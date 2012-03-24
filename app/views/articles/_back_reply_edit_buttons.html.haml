@@ -1,7 +1,6 @@
 .clearfix
   .pull-left
     - if params[:action] == 'show' # display delete button on :show but not on :index
-      %a.btn{href: tweets_path(q: params[:q], page: params[:page])} Back
+      %a.btn{href: articles_path(q: params[:q], page: params[:page])} Back
   .pull-right
-    %a.reply-btn.btn{href: tweet_reply_path(tweet, origin: params[:action], q: params[:q], page: params[:page])} Add related
-    %a.edit-btn.btn{href: edit_tweet_path(tweet, origin: params[:action], q: params[:q], page: params[:page])} Edit
+    %a.edit-btn.btn{href: edit_article_path(tweet, origin: params[:action], q: params[:q], page: params[:page])} Edit

@@ -1,18 +1,22 @@
-- if !@ajax # do not render search bar when searching via ajax
-  %form#search.well.form-search
-    %input#search-field.search-query{type: 'text', placeholder: 'Search...', value: params[:q]}
-    %a#clear-search-btn.close.close-large{style: "display: #{params[:q] ? 'inline-block' : 'none'}"} &times;
-#matches
-  - if @tweets
-    - @tweets.each do |tweet|
-      %article.well{'data-passed-name' => "swiped-#{tweet.id}", ontouchstart: "touchStart(event,'swiped-#{tweet.id}');", ontouchend: "touchEnd(event);", ontouchmove: "touchMove(event);", ontouchcancel: "touchCancel(event);"}
-        = render partial: 'tweet_and_hash_tag', locals: {tweet: tweet}
-        - if tweet.related_count > 1
-          \-
-          %a{href: tweet_path(tweet, q: params[:q], page: params[:page])}= "#{tweet.related_count - 1} related"
-        .swiped-container{id: "swiped-#{tweet.id}"}
-          .vertical-align-container
-            .vertical-align
-              = render partial: 'back_reply_edit_buttons', locals: {tweet: tweet}
-    #pagination-container
-      = will_paginate @posts, id: 'pagination', class: 'pagination-centered', previous_label: '←', next_label: '→', inner_window: 1, outer_window: 0
+/ %form#search.well.form-search
+/   %input#search-field.search-query{type: 'text', placeholder: 'Search...', value: params[:q]}
+/   %a#clear-search-btn.close.close-large{style: "display: #{params[:q] ? 'inline-block' : 'none'}"} &times;
+/ #matches
+/   - if @articles
+/     - @articles.each do |tweet|
+/       %article.well{'data-passed-name' => "swiped-#{tweet.id}", ontouchstart: "touchStart(event,'swiped-#{tweet.id}');", ontouchend: "touchEnd(event);", ontouchmove: "touchMove(event);", ontouchcancel: "touchCancel(event);"}
+/         = render partial: 'tweet_and_hash_tag', locals: {tweet: tweet}
+/         .swiped-container{id: "swiped-#{tweet.id}"}
+/           .vertical-align-container
+/             .vertical-align
+/               = render partial: 'back_reply_edit_buttons', locals: {tweet: tweet}
+/     #pagination-container
+/       = will_paginate @posts, id: 'pagination', class: 'pagination-centered', previous_label: '←', next_label: '→', inner_window: 1, outer_window: 0
+#articles
+- content_for :page_specific_javascript do
+  :javascript
+    $(function() {
+      console.log('started backbone');
+      window.router = new EvernoteClone.Routers.ArticlesRouter({articles: #{@articles.to_json.html_safe}});
+      Backbone.history.start();
+    });

@@ -24,12 +24,13 @@ class ArticlesController < ApplicationController
 
   # show all tweets; handle search queries and pagination
   def index
-    query = params[:q].try(:downcase)
-    if query.blank?
-      @articles = Article.of(current_user).paginate(page: params[:page])
-    else
-      @articles = Article.of(current_user).where('LOWER(title) like ?', "%#{query}%").paginate(page: params[:page])
-    end
+    # query = params[:q].try(:downcase)
+    # if query.blank?
+    #   @articles = Article.of(current_user).paginate(page: params[:page])
+    # else
+    #   @articles = Article.of(current_user).where('LOWER(title) like ?', "%#{query}%").paginate(page: params[:page])
+    # end
+    @articles = Article.all
   end
   
   def new; end
