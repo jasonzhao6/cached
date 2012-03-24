@@ -1,6 +1,6 @@
-= form_for Tweet.new, html: {id: 'new-tweet-form', 'data-remote' => 'true'} do |f|
-  = render partial: 'tweet_and_hash_tag_fields', locals: {f: f, tweet: nil}
+= form_for Article.new, html: {id: 'new-article-form', 'data-remote' => 'true'} do |f|
+  = render partial: 'tweet_and_hash_tag_fields', locals: {f: f, article: nil}
   .form-actions
-    = render partial: 'delete_cancel_save_buttons', locals: {tweet: nil, show_delete: false}
+    = render partial: 'delete_cancel_save_buttons', locals: {article: nil, show_delete: false}
   %footer
     %p#related
