@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_filter :authenticated?
   before_filter :inject_current_user_into_params, only: [:create, :update] # an alternative measure to this could be mass assignment
+  respond_to :json, only: :create
   
    # on error, return error message with 400, client should show error message
    # on success, return nothing with 200, client should redirect to homepage
@@ -9,7 +10,7 @@ class ArticlesController < ApplicationController
     if article.invalid?
       render status: 400, inline: extract_first_error_message(article.errors.messages)
     else
-      render status: 200, inline: article.id.to_s
+      respond_with article
     end
   end
   
