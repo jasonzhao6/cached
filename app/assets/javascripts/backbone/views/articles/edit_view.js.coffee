@@ -7,13 +7,19 @@ class EvernoteClone.Views.Articles.EditView extends Backbone.View
     "submit #edit-article" : "update"
 
   update : (e) ->
+    console.log 'edit view update'
     e.preventDefault()
     e.stopPropagation()
 
     @model.save(null,
       success : (article) =>
+        console.log 'success callback'
         @model = article
         window.location.hash = "/#{@model.id}"
+
+      error: (article, jqXHR) =>
+        console.log 'error callback'
+        alert jqXHR.responseText
     )
 
   render : ->

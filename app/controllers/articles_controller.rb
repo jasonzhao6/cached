@@ -1,10 +1,10 @@
 class ArticlesController < ApplicationController
   before_filter :authenticated?
   before_filter :inject_current_user_into_params, only: [:create, :update] # an alternative measure to this could be mass assignment
-  respond_to :json, only: :create
+  respond_to :json, except: :index
   
    # on error, return error message with 400, client should show error message
-   # on success, return nothing with 200, client should redirect to homepage
+   # on success, return new article in json format, client should extract article id
   def create
     article = Article.create params['article']
     if article.invalid?
@@ -17,13 +17,10 @@ class ArticlesController < ApplicationController
   def destroy
     article = Article.of(current_user).find params[:id]
     article.delete
+    render nothing: true
   end
   
-  def edit
-    @article = Article.of(current_user).find params[:id]
-  end
-
-  # show all tweets; handle search queries and pagination
+  # show all articles, loaded into Backbone on start up
   def index
     # query = params[:q].try(:downcase)
     # if query.blank?
@@ -34,14 +31,8 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
   
-  def new; end
-  
-  def show
-    @article = Article.of(current_user).find params[:id]
-  end
-  
   # on error, return error message with 400, client should show error message
-  # on success, return nothing with 200, client should redirect to either :show or :index
+  # on success, return nothing with 204, client should redirect to :show
   def update
     article = Article.of(current_user).find params[:id] rescue render status: 500, inline: 'Article not found' and return
     # old_article = article.clone TODO used to update Redis index
@@ -50,7 +41,7 @@ class ArticlesController < ApplicationController
     if article.invalid?
       render status: 400, inline: extract_first_error_message(article.errors.messages)
     else
-      render status: 200, nothing: true
+      render status: 204, nothing: true
     end
   end
   
