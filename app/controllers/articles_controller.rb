@@ -32,6 +32,11 @@ class ArticlesController < ApplicationController
     @articles = Article.of(params[:user_id] || current_user).for_index
   end
   
+  def show
+    article = Article.of(current_user).find params[:id]
+    respond_with article
+  end
+  
   # on error, return error message with 400, client should show error message
   # on success, return nothing with 204, client should redirect to :show
   def update
