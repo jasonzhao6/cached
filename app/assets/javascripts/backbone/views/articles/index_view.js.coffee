@@ -14,7 +14,7 @@ class EvernoteClone.Views.Articles.IndexView extends Backbone.View
   addOne: (article) =>
     console.log 'index view add one'
     view = new EvernoteClone.Views.Articles.ArticleView({model : article})
-    @$("tbody").append(view.render().el)
+    @$("#articles-table").append(view.render().el)
 
   render: =>
     console.log 'index view render'
