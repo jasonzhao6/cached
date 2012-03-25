@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_filter :authenticated?
+  before_filter :authenticated?, except: [:index]
   before_filter :inject_current_user_into_params, only: [:create, :update] # an alternative measure to this could be mass assignment
   respond_to :json, except: :index
   
@@ -28,7 +28,8 @@ class ArticlesController < ApplicationController
     # else
     #   @articles = Article.of(current_user).where('LOWER(title) like ?', "%#{query}%").paginate(page: params[:page])
     # end
-    @articles = Article.all
+    authenticated? if !params[:user_id] && !current_user
+    @articles = Article.of(params[:user_id] || current_user)
   end
   
   # on error, return error message with 400, client should show error message
