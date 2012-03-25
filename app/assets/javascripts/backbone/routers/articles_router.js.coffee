@@ -27,12 +27,19 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
     console.log 'routing show'
     article = @articles.get(id)
 
-    @view = new EvernoteClone.Views.Articles.ShowView(model: article)
-    $("#content").html(@view.render().el)
+    article = @articles.get(id)
+    article.fetch
+      success: ->
+        view = new EvernoteClone.Views.Articles.ShowView(model: article)
+        $('#content').html(view.render().el)
 
   edit: (id) ->
     console.log 'routing edit'
     article = @articles.get(id)
+    article.fetch
+      success: ->
+        view = new EvernoteClone.Views.Articles.EditView(model: article)
+        $('#content').html(view.render().el)
 
     @view = new EvernoteClone.Views.Articles.EditView(model: article)
     $("#content").html(@view.render().el)
