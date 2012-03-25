@@ -1,10 +1,10 @@
 EvernoteClone.Views.Articles ||= {}
 
 class EvernoteClone.Views.Articles.EditView extends Backbone.View
-  template : JST["backbone/templates/articles/edit"]
+  template : JST['backbone/templates/articles/edit']
 
   events :
-    "submit #edit-article" : "update"
+    'submit #edit-article' : 'update'
 
   update : (e) ->
     console.log 'edit view update'
@@ -25,6 +25,6 @@ class EvernoteClone.Views.Articles.EditView extends Backbone.View
   render : ->
     $(@el).html(@template(@model.toJSON() ))
 
-    this.$("form").backboneLink(@model)
+    this.$('form').backboneLink(@model)
 
     return this
