@@ -5,6 +5,7 @@ class Article < ActiveRecord::Base
   scope :of, (lambda do |current_user| 
     {conditions: ['articles.user_id = ?', current_user]}
   end)
+  scope :for_index, select: [:id, :title]
   
   self.per_page = 10
   

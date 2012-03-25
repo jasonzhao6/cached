@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
     #   @articles = Article.of(current_user).where('LOWER(title) like ?', "%#{query}%").paginate(page: params[:page])
     # end
     authenticated? if !params[:user_id] && !current_user
-    @articles = Article.of(params[:user_id] || current_user)
+    @articles = Article.of(params[:user_id] || current_user).for_index
   end
   
   # on error, return error message with 400, client should show error message
