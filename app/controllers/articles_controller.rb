@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
-  before_filter :authenticated?, except: [:index]
-  before_filter :inject_current_user_into_params, only: [:create, :update] # an alternative measure to this could be mass assignment
+  before_filter :authenticated?, except: [:index, :show] # allow anonymous browsing of articles
   before_filter :inject_current_user_into_params, only: [:create, :update] # an alternative way to enforce correct current user could be mass assignment
   respond_to :json, except: :index
   
@@ -39,7 +38,7 @@ class ArticlesController < ApplicationController
   end
   
   def show
-    article = Article.of(current_user).find params[:id]
+    article = Article.find params[:id]
     respond_with article
   end
   
