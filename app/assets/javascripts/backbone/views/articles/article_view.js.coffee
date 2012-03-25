@@ -1,18 +1,16 @@
 EvernoteClone.Views.Articles ||= {}
 
 class EvernoteClone.Views.Articles.ArticleView extends Backbone.View
-  template: JST["backbone/templates/articles/article"]
+  template: JST['backbone/templates/articles/article']
 
   events:
-    "click .destroy" : "destroy"
+    'click' : 'show'
 
-  tagName: "article"
-  className: "well"
+  tagName: 'article'
+  className: 'well'
 
-  destroy: () ->
-    @model.destroy()
-    this.remove()
-    return false
+  show: () ->
+    window.location.hash = "/#{@model.id}"
 
   render: ->
     $(@el).html(@template(@model.toJSON()))
