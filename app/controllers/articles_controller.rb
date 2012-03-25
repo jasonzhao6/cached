@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_filter :authenticated?, except: [:index]
   before_filter :inject_current_user_into_params, only: [:create, :update] # an alternative measure to this could be mass assignment
+  before_filter :inject_current_user_into_params, only: [:create, :update] # an alternative way to enforce correct current user could be mass assignment
   respond_to :json, except: :index
   
    # on error, return error message with 400, client should show error message
@@ -20,7 +21,7 @@ class ArticlesController < ApplicationController
     render nothing: true
   end
   
-  # show all articles, loaded into Backbone on start up
+  # load all articles' titles into Backbone on start up
   def index
     # query = params[:q].try(:downcase)
     # if query.blank?
@@ -28,8 +29,13 @@ class ArticlesController < ApplicationController
     # else
     #   @articles = Article.of(current_user).where('LOWER(title) like ?', "%#{query}%").paginate(page: params[:page])
     # end
-    authenticated? if !params[:user_id] && !current_user
-    @articles = Article.of(params[:user_id] || current_user).for_index
+    # if a user id is specified, list that user's articles; or if user is loggged in, display current user's articles
+    if params[:user_id] || current_user
+      @articles = Article.of(params[:user_id] || current_user).for_index
+    # otherwise, ask user to log in
+    else 
+      redirect_to login_path and return
+    end
   end
   
   def show
