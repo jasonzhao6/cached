@@ -30,7 +30,7 @@ class ArticlesController < ApplicationController
     # end
     # if a user id is specified, list that user's articles; or if user is loggged in, display current user's articles
     if params[:user_id] || current_user
-      @articles = Article.of(params[:user_id] || current_user).for_index
+      @articles = Article.of(params[:user_id] || current_user).for_index.chronological # displayed in reverse by Backbone
     # otherwise, ask user to log in
     else 
       redirect_to login_path and return
@@ -47,7 +47,6 @@ class ArticlesController < ApplicationController
   def update
     article = Article.of(current_user).find params[:id] rescue render status: 500, inline: 'Article not found' and return
     # old_article = article.clone TODO used to update Redis index
-    params['article']['created_at'] = "#{params['created_at_date']} #{params['created_at_time']}"
     article.update_attributes params['article']
     if article.invalid?
       render status: 400, inline: extract_first_error_message(article.errors.messages)

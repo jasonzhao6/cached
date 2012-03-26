@@ -25,8 +25,7 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
     @collection.create(@model.toJSON(),
       success: (article) =>
         console.log 'success callback'
-        @model = article
-        window.location.hash = "/#{@model.id}"
+        window.location.hash = "/#{article.id}"
 
       error: (article, jqXHR) =>
         console.log 'error callback'

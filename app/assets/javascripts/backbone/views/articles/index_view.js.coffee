@@ -9,7 +9,10 @@ class EvernoteClone.Views.Articles.IndexView extends Backbone.View
 
   addAll: () =>
     console.log 'index view add all'
-    @options.articles.each(@addOne)
+    i = @options.articles.length
+    while i > 0
+      @addOne @options.articles.at(i - 1)
+      i--
 
   addOne: (article) =>
     console.log 'index view add one'

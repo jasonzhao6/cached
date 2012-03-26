@@ -1,7 +1,7 @@
 class Article < ActiveRecord::Base
   belongs_to :user
-  
-  scope :recent, order: 'articles.created_at DESC'
+
+  scope :chronological, order: 'articles.created_at ASC'
   scope :of, (lambda do |current_user| 
     {conditions: ['articles.user_id = ?', current_user]}
   end)
