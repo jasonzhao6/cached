@@ -12,15 +12,6 @@
 body {
   max-width: 500px;
 }
-/* Pattern for middle vertical alignment */
-.vertical-align-container {
-  display: table;
-  height: 100%;
-}
-.vertical-align {
-  display: table-cell;
-  vertical-align: middle;
-}
 
 /*-------*/
 /* Login */
@@ -64,22 +55,6 @@ body {
 }
 #search-field {
   width: 208px;
-}
-article {
-  position: relative;
-}
-.swiped-container {
-  background-color: #F5F5F5;
-  display: none;
-  height: 80%;
-  padding: 0 10px;
-  position: absolute;
-  right: 0;
-  top: 10%;
-  width: 140px;
-}
-.swiped-container.active {
-  display: block;
 }
 #to-paginate {
   display: none;
@@ -130,80 +105,14 @@ article {
   text-decoration: none;
 }
 
-/*-----------*/
-/* New tweet */
-/*-----------*/
-#tweet-field {
-  padding: 8px;
-  margin-top: 8px;
-}
-#hash-tag-field {
-  width: 210px;
-}
-#char-count {
-  float: right;
-  font-weight: bold;
-  margin-top: 4px;
-}
+/*-------------*/
+/* New article */
+/*-------------*/
 
-/*------------*/
-/* Edit tweet */
-/*------------*/
-#clear-hash-tag-btn {
-  left: 261px;
-  position: absolute;
-}
-#timestamp-container h4 {
-  margin: 10px 0;
-}
-input[type=date] {
-  margin-right: 4px;
-  width: 120px;
-}
-input[type=time] {
-  width: 93px;
-}
-@media only screen and (max-device-width: 480px) {
-  input[type=date], input[type=time] {
-    height: 30px;
-  }
-}
+/*--------------*/
+/* Edit article */
+/*--------------*/
 
-/*------------*/
-/* Show tweet */
-/*------------*/
-#slider.well {
-  padding: 0;
-}
-#slider ul {
-  margin: 0;
-}
-#slider li {
-  height: 100px;
-}
-#slider .vertical-align {
-  padding: 16px;
-}
-#position {
-  font-size: 27px;
-  margin: 16px 0 0 0;
-  text-align: center;
-}
-#position li {
-  color: #ccc;
-  display: inline-block;
-}
-#position li.active {
-  color: #333;
-}
-
-/*--------*/
-/* Footer */
-/*--------*/
-#quote {
-  font-size: 14px;
-}
-#author {
-  float: right;
-  padding-right: 20px;
-}
+/*--------------*/
+/* Show article */
+/*--------------*/
