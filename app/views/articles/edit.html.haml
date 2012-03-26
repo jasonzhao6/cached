@@ -1,8 +1,0 @@
-= form_for @tweet, html: {id: 'edit-tweet-form', 'data-remote' => 'true'} do |f|
-  = render partial: 'tweet_and_hash_tag_fields', locals: {f: f, tweet: @tweet}
-  #timestamp-container
-    %h4 Timestamp
-    %input{name: 'created_at_date', type: 'date', value: @tweet.created_at.to_date}
-    %input{name: 'created_at_time', type: 'time', value: @tweet.created_at.strftime('%T')}
-  .form-actions
-    = render partial: 'delete_cancel_save_buttons', locals: {tweet: @tweet, show_delete: true}
