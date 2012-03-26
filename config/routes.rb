@@ -5,7 +5,7 @@ EvernoteClone::Application.routes.draw do
     # get :related TODO implement vector based document matching algorithm
   end
 
-  get 'users/:user_id' => 'articles#index' # for browsing other people's articles
+  get 'demo' => 'articles#index', defaults: {user_id: 2}
 
   get 'login' => 'sessions#login'
   post 'login' => 'sessions#actually_login'

@@ -4,8 +4,9 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
     @navbars = {
       newArticle: JST['backbone/templates/navbars/new']
       index: JST['backbone/templates/navbars/index']
-      indexWhenLoggedOut: JST['backbone/templates/navbars/index_when_logged_out']
+      indexDemo: JST['backbone/templates/navbars/index_demo']
       show: JST['backbone/templates/navbars/show']
+      showDemo: JST['backbone/templates/navbars/show_demo']
       edit: JST['backbone/templates/navbars/edit']
     }
 
@@ -34,14 +35,17 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
     if (EvernoteClone.currentUserId)
       $('#custom-nav').html(@navbars.index)
     else
-      $('#custom-nav').html(@navbars.indexWhenLoggedOut)
+      $('#custom-nav').html(@navbars.indexDemo)
 
     view = new EvernoteClone.Views.Articles.IndexView(articles: @articles)
     $('#content').html(view.render().el)
 
   show: (id) ->
     console.log 'routing show'
-    $('#custom-nav').html(@navbars.show(id: id))
+    if (EvernoteClone.currentUserId)
+      $('#custom-nav').html(@navbars.show(id: id))
+    else
+    $('#custom-nav').html(@navbars.showDemo)
 
     article = @articles.get(id)
     article.fetch

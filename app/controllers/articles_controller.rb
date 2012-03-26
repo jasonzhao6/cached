@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
-  before_filter :authenticated?, except: [:index, :show] # allow anonymous browsing of articles
-  before_filter :inject_current_user_into_params, only: [:create, :update] # an alternative way to enforce correct current user could be mass assignment
+  before_filter :authenticated?, except: [:index, :show] # allow anonymous browsing of articles; currently, the only route enabled is '/demo'
+  before_filter :inject_current_user_into_params, only: [:create, :update] # enforce correct current user, an alternative could be using mass assignment
   respond_to :json, except: :index
   
    # on error, return error message with 400, client should show error message
