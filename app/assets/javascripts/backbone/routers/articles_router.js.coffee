@@ -45,7 +45,7 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
     if (EvernoteClone.currentUserId)
       $('#custom-nav').html(@navbars.show(id: id))
     else
-    $('#custom-nav').html(@navbars.showDemo)
+      $('#custom-nav').html(@navbars.showDemo)
 
     article = @articles.get(id)
     article.fetch
