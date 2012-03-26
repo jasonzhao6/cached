@@ -50,9 +50,6 @@ body {
 /*-------*/
 /* Index */
 /*-------*/
-#content {
-  overflow: hidden;
-}
 #search-field {
   width: 208px;
 }
@@ -107,11 +104,39 @@ body {
 
 /*-------------*/
 /* New article */
-/*-------------*/
-
-/*--------------*/
 /* Edit article */
 /*--------------*/
+form[name=article] input, [contenteditable='true'] {
+  margin: 5px 0 0;
+}
+[contenteditable='true'] {
+  border: 1px solid #75B9F0;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 8px 0px #75B9F0;
+  -moz-box-shadow: 0px 0px 8px 0px #75B9F0;
+  box-shadow: 0px 0px 8px 0px #75B9F0;
+  min-height: 400px;
+  outline: 0;
+  padding: 6px 20px 6px 10px;
+}
+[contenteditable='true']:not(:focus) {
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0px 0px 5px 0px #ddd;
+  -moz-box-shadow: inset 0px 0px 5px 0px #ddd;
+  box-shadow: inset 0px 0px 5px 0px #ddd;
+}
+@media handheld, only screen and (max-width: 500px) {
+  [contenteditable='true'] {
+    -webkit-box-shadow: inset 0px 2px 2px 0px #ccc;
+    -moz-box-shadow: inset 0px 2px 2px 0px #ccc;
+    box-shadow: inset 0px 2px 2px 0px #ccc;
+  }
+  [contenteditable='true']:not(:focus) {
+    -webkit-box-shadow: inset 0px 2px 2px 0px #ccc;
+    -moz-box-shadow: inset 0px 2px 2px 0px #ccc;
+    box-shadow: inset 0px 2px 2px 0px #ccc;
+  }
+}
 
 /*--------------*/
 /* Show article */

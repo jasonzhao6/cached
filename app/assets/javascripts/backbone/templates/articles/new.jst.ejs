@@ -1,20 +1,5 @@
-<h1>New article</h1>
-
 <form id="new-article" name="article">
-  <div class="field">
-    <label for="title"> title:</label>
-    <input type="text" name="title" id="title" value="<%= title %>" >
-  </div>
-
-  <div class="field">
-    <label for="body"> body:</label>
-    <input type="text" name="body" id="body" value="<%= body %>" >
-  </div>
-
-  <div class="actions">
-    <input type="submit" value="Create Article" />
-  </div>
-
+  <input type="text" name="title" id="title" class="input-full" placeholder="Paste title here">
+  <input type="text" name="body" id="body" class="input-full">
+  <div contenteditable="true"></div>
 </form>
-
-<a href="#/index">Back</a>
