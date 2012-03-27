@@ -156,7 +156,7 @@ form[name=article] input, [contenteditable='true'] {
 #article-show article {
   margin-top: 11px;
 }
-#article-show article * {
+#article-show article, #article-show article * {
   font-family: georgia, times, serif;
   font-size: 17px;
   line-height: 25px;
