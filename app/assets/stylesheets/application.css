@@ -141,3 +141,14 @@ form[name=article] input, [contenteditable='true'] {
 /*--------------*/
 /* Show article */
 /*--------------*/
+#article-show * {
+  font-family: times, serif;
+  font-size: 16px;
+}
+#article-show h1 {
+  font-size: 24px;
+}
+#article-show article {
+}
+
+

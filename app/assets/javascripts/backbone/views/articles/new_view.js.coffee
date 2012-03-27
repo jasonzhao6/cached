@@ -5,6 +5,7 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
 
   events:
     "submit #new-article": "save"
+    "blur [contenteditable='true']": "beforeSubmit"
 
   constructor: (options) ->
     super(options)
@@ -33,8 +34,11 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
         alert jqXHR.responseText
     )
 
+  beforeSubmit: ->
+    $('#body').val $("[contenteditable='true']").html()
+
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template(@model.toJSON()))
 
     this.$("form").backboneLink(@model)
 
