@@ -141,14 +141,31 @@ form[name=article] input, [contenteditable='true'] {
 /*--------------*/
 /* Show article */
 /*--------------*/
-#article-show * {
-  font-family: times, serif;
-  font-size: 16px;
+#article-show h1, #article-show .seperator, #article-show article {
+  margin: 0 12px;
 }
 #article-show h1 {
-  font-size: 24px;
+  font-size: 21px;
+  line-height: 23px;
+  margin-top: 17px;
+}
+#article-show .seperator {
+  border-bottom: 2px solid #bbb;
+  margin-top: 14px;
 }
 #article-show article {
+  margin-top: 11px;
 }
+#article-show article * {
+  font-family: georgia, times, serif;
+  font-size: 17px;
+  line-height: 25px;
+}
+#article-show article h1, #article-show article h2, #article-show article h3, #article-show article h4, #article-show article h5, #article-show article h6 {
+  line-height: 24px;
+  margin-bottom: 18px;
+  padding-top: 4px;
+}
+
 
 
