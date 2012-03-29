@@ -142,12 +142,13 @@ form[name=article] input, [contenteditable='true'] {
 /* Show article */
 /*--------------*/
 #article-show h1, #article-show .seperator, #article-show article {
-  margin: 0 12px;
+  margin: 0 6px;
 }
 #article-show h1 {
+  color: #222;
   font-size: 21px;
   line-height: 23px;
-  margin-top: 17px;
+  margin-top: 12px;
 }
 #article-show .seperator {
   border-bottom: 2px solid #bbb;
@@ -157,6 +158,7 @@ form[name=article] input, [contenteditable='true'] {
   margin-top: 11px;
 }
 #article-show article, #article-show article * {
+  color: #222;
   font-family: georgia, times, serif;
   font-size: 17px;
   line-height: 25px;
