@@ -1,20 +1,5 @@
-<h1>Edit article</h1>
-
 <form id="edit-article" name="article">
-  <div class="field">
-    <label for="title"> title:</label>
-    <input type="text" name="title" id="title" value="<%= title %>" >
-  </div>
-
-  <div class="field">
-    <label for="body"> body:</label>
-    <input type="text" name="body" id="body" value="<%= body %>" >
-  </div>
-
-  <div class="actions">
-    <input type="submit" value="Update Article" />
-  </div>
-
+  <input type="text" name="title" id="title" class="input-full"  value="<%= title %>">
+  <input type="hidden" name="body" id="body" class="input-full">
+  <div contenteditable="true"><%= body %></div>
 </form>
-
-<a href="#/index">Back</a>

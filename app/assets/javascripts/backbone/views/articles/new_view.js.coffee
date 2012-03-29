@@ -6,7 +6,6 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
   events:
     "submit #new-article": "save"
     "keydown [contenteditable='true']": "clearPlaceholder"
-    "blur [contenteditable='true']": "beforeSubmit"
 
   constructor: (options) ->
     super(options)
@@ -21,6 +20,7 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
+    @beforeSave()
     @model.unset("errors")
 
     collection = @collection
@@ -41,7 +41,7 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
       $contentEditable.data('placeholder', false)
       $contentEditable.text('')
 
-  beforeSubmit: ->
+  beforeSave: ->
     $('#body').val $("[contenteditable='true']").html()
     $('#body').change()
 

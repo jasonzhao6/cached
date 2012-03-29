@@ -11,6 +11,7 @@ class EvernoteClone.Views.Articles.EditView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
+    @beforeSave()
     @model.save(null,
       success : (article) =>
         console.log 'success callback'
@@ -21,6 +22,10 @@ class EvernoteClone.Views.Articles.EditView extends Backbone.View
         console.log 'error callback'
         alert jqXHR.responseText
     )
+
+  beforeSave: ->
+    $('#body').val $("[contenteditable='true']").html()
+    $('#body').change()
 
   render : ->
     $(@el).html(@template(@model.toJSON() ))
