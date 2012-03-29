@@ -51,7 +51,11 @@ body {
 /* Index */
 /*-------*/
 #search-field {
+  font-weight: bold;
   width: 208px;
+}
+article.well {
+  font-weight: bold;
 }
 #to-paginate {
   display: none;
