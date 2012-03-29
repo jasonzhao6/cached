@@ -50,9 +50,9 @@ function params() {
   });
   return vars;
 }
-function appendSearchParams() {
-  var parameters = '&q=' + params()['q'] + '&page=' + params()['page']
-  parameters = parameters.replace(/q=undefined&/, '');
-  parameters = parameters.replace(/page=undefined/, '');
-  return parameters;
-}
+
+// Force all article links to open in new window
+$('body').delegate('#article-show article a', 'click', function() {
+  window.open($(this).attr('href'));
+  return false;
+});
