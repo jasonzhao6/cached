@@ -5,6 +5,7 @@ class EvernoteClone.Views.Articles.EditView extends Backbone.View
 
   events :
     'submit #edit-article' : 'update'
+    'click #delete' : 'delete'
 
   update : (e) ->
     console.log 'edit view update'
@@ -22,6 +23,14 @@ class EvernoteClone.Views.Articles.EditView extends Backbone.View
         console.log 'error callback'
         alert jqXHR.responseText
     )
+
+  delete: ->
+    if (confirm 'Are you sure you want to delete?')
+      @model.destroy
+        success: ->
+          window.location.hash = "/index"
+        error: ->
+          alert 'Delete was not successful'
 
   beforeSave: ->
     $('#body').val $("[contenteditable='true']").html()

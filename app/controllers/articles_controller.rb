@@ -16,8 +16,8 @@ class ArticlesController < ApplicationController
   
   def destroy
     article = Article.of(current_user).find params[:id]
-    article.delete
-    render nothing: true
+    article.destroy
+    respond_with article
   end
   
   # load all articles' titles into Backbone on start up

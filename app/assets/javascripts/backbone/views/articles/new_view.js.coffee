@@ -4,8 +4,8 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
   template: JST["backbone/templates/articles/new"]
 
   events:
-    "submit #new-article": "save"
-    "keydown [contenteditable='true']": "clearPlaceholder"
+    "submit #new-article" : "save"
+    "keydown [contenteditable='true']" : "clearPlaceholder"
 
   constructor: (options) ->
     super(options)
@@ -35,7 +35,7 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
         alert jqXHR.responseText
     )
 
-  clearPlaceholder: () ->
+  clearPlaceholder: ->
     $contentEditable = $("[contenteditable='true']")
     if $contentEditable.data('placeholder')
       $contentEditable.data('placeholder', false)
