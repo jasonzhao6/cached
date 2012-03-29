@@ -109,6 +109,10 @@ body {
 form[name=article] input, [contenteditable='true'] {
   margin: 5px 0 0;
 }
+.placeholder {
+  color: #999;
+  position: absolute;
+}
 [contenteditable='true'] {
   border: 1px solid #75B9F0;
   border-radius: 3px;
