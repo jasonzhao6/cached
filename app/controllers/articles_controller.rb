@@ -46,6 +46,7 @@ class ArticlesController < ApplicationController
     article.body.gsub! /margin-right:[a-z0-9, -.]+;/, ''
     article.body.gsub! /margin-bottom:[a-z0-9, -.]+;/, ''
     article.body.gsub! /margin-left:[a-z0-9, -.]+;/, ''
+    article.body.gsub! /width="[0-9]{3,}"/, 'width="100%"'
     respond_with article
   end
   
