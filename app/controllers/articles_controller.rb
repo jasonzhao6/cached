@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_filter :authenticated?, except: [:index, :show] # allow anonymous browsing of articles; currently, the only route enabled is '/demo'
+  before_filter :authenticated?, except: [:index, :search, :show] # allow anonymous browsing of articles; currently, the only route enabled is '/demo'
   before_filter :inject_current_user_into_params, only: [:create, :update] # enforce correct current user, an alternative could be using mass assignment
   respond_to :json, except: :index
   
@@ -22,18 +22,21 @@ class ArticlesController < ApplicationController
   
   # load all articles' titles into Backbone on start up
   def index
-    # query = params[:q].try(:downcase)
-    # if query.blank?
-    #   @articles = Article.of(current_user).paginate(page: params[:page])
-    # else
-    #   @articles = Article.of(current_user).where('LOWER(title) like ?', "%#{query}%").paginate(page: params[:page])
-    # end
-    # if a user id is specified, list that user's articles; or if user is loggged in, display current user's articles
-    if params[:user_id] || current_user
-      @articles = Article.of(params[:user_id] || current_user).for_index.chronological # displayed in reverse by Backbone
-    # otherwise, ask user to log in
+    user = params[:demo] ? 2 : current_user # user must be demo user or authorized current user
+    if user
+      @articles = Article.of(user).for_index.chronological
     else 
       redirect_to login_path and return
+    end
+  end
+  
+  def search
+    user = current_user || 2 # if user is not authorized current user, default to demo user
+    query = params[:q].try(:downcase)
+    if query.blank?
+      respond_with Article.of(user).for_index.chronological
+    else
+      respond_with Article.of(user).for_index.chronological.where('LOWER(title) like ?', "%#{query}%")
     end
   end
   

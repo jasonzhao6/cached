@@ -1,20 +1,20 @@
 EvernoteClone.Views.Articles ||= {}
 
 class EvernoteClone.Views.Articles.EditView extends Backbone.View
-  template : JST['backbone/templates/articles/edit']
+  template: JST['backbone/templates/articles/edit']
 
-  events :
-    'submit #edit-article' : 'update'
-    'click #delete' : 'delete'
+  events:
+    'submit #edit-article': 'update'
+    'click #delete-btn': 'delete'
 
-  update : (e) ->
+  update: (e) ->
     console.log 'edit view update'
     e.preventDefault()
     e.stopPropagation()
 
     @beforeSave()
     @model.save(null,
-      success : (article) =>
+      success: (article) =>
         console.log 'success callback'
         @model = article
         window.location.hash = "/#{@model.id}"
@@ -36,7 +36,7 @@ class EvernoteClone.Views.Articles.EditView extends Backbone.View
     $('#body').val $("[contenteditable='true']").html()
     $('#body').change()
 
-  render : ->
+  render: ->
     $(@el).html(@template(@model.toJSON() ))
 
     this.$('form').backboneLink(@model)

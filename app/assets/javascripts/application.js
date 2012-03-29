@@ -52,7 +52,7 @@ function params() {
 }
 
 // Force all article links to open in new window
-$('body').delegate('#article-show article a', 'click', function() {
+$('#content').delegate('#article-show article a', 'click', function() {
   window.open($(this).attr('href'));
   return false;
 });

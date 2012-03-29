@@ -118,7 +118,7 @@ form[name=article] input, [contenteditable='true'] {
   color: #999;
   position: absolute;
 }
-button#delete {
+#delete-btn {
   font-weight: bold;
   width: 100%;
 }
