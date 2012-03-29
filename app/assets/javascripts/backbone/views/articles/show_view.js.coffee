@@ -8,4 +8,5 @@ class EvernoteClone.Views.Articles.ShowView extends Backbone.View
   render: ->
     console.log 'show view render'
     $(@el).html(@template(@model.toJSON() ))
+
     return this
