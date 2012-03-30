@@ -184,6 +184,13 @@ form[name=article] input, [contenteditable='true'] {
 }
 #article-show article a {
   color: #B20022;
+  word-break: break-all;
 }
-
-
+#article-show article code {
+  word-break: break-all;
+}
+#article-show article pre {
+  overflow-x: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
