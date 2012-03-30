@@ -42,15 +42,7 @@ class ArticlesController < ApplicationController
   
   def show
     article = Article.find params[:id]
-    # these filters should eventually be applied on create.. once they are more finalized
-    article.body.gsub! /color:[a-z0-9, -.]+;/i, ''
-    article.body.gsub! /font-family:[a-z0-9, -.]+;/i, ''
-    article.body.gsub! /font-size:[a-z0-9, -.]+;/i, ''
-    article.body.gsub! /line-height:[a-z0-9, -.]+;/i, ''
-    article.body.gsub! /margin-top:[a-z0-9, -.]+;/i, ''
-    article.body.gsub! /margin-right:[a-z0-9, -.]+;/i, ''
-    article.body.gsub! /margin-bottom:[a-z0-9, -.]+;/i, ''
-    article.body.gsub! /margin-left:[a-z0-9, -.]+;/i, ''
+    article.body.gsub! /style="/, 'data-style="'
     article.body.gsub! /width="[0-9]{3,}"/, 'width="100%"'
     respond_with article
   end
