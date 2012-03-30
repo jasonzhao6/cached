@@ -6,9 +6,6 @@ class EvernoteClone.Views.Articles.ArticleView extends Backbone.View
   events:
     'click' : 'show'
 
-  tagName: 'article'
-  className: 'well'
-
   show: () ->
     window.location.hash = "/#{@model.id}"
 

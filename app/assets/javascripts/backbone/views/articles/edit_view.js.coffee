@@ -37,7 +37,7 @@ class EvernoteClone.Views.Articles.EditView extends Backbone.View
     @$('#body').change()
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template(@model.toJSON()))
 
     @$('form').backboneLink(@model)
 
