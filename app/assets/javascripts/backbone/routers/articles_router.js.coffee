@@ -47,6 +47,7 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
       success: ->
         view = new EvernoteClone.Views.Articles.ShowView(model: article)
         $('#content').html(view.render().el)
+        $('body').scrollTop(0)
 
   edit: (id) ->
     $('#custom-nav').html(@navbars.edit(id: id))
