@@ -16,7 +16,6 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
     )
 
   save: (e) ->
-    console.log 'new view save'
     e.preventDefault()
     e.stopPropagation()
 
@@ -26,11 +25,9 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
     collection = @collection
     @collection.create(@model.toJSON(),
       success: (article) =>
-        console.log 'success callback'
         window.location.hash = "/#{article.id}"
 
       error: (article, jqXHR) =>
-        console.log 'error callback'
         collection.remove article
         alert jqXHR.responseText
     )

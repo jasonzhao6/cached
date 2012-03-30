@@ -17,7 +17,6 @@ class EvernoteClone.Views.Articles.IndexView extends Backbone.View
     searchView = new EvernoteClone.Views.Articles.SearchView()
 
     searchView.on 'search:success', =>
-      console.log 'received search:success'
       articles = new EvernoteClone.Collections.ArticlesCollection()
       articles.reset searchView.searchResult
       @$('#articles-table').html('')

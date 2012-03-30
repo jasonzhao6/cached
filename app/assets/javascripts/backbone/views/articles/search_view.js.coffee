@@ -18,7 +18,6 @@ class EvernoteClone.Views.Articles.SearchView extends Backbone.View
         url: "/search?q=" + escape($searchFieldVal)
         success: (data) =>
           @searchResult = data
-          console.log 'trigger search:success'
           @trigger 'search:success'
     else
       @trigger 'search:clear'
@@ -36,7 +35,6 @@ class EvernoteClone.Views.Articles.SearchView extends Backbone.View
       @search()
 
   render: ->
-    window.bar = @
     $(@el).html(@template())
 
     return this

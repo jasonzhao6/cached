@@ -1,6 +1,5 @@
 class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
   initialize: (options) ->
-    console.log 'routing initialize'
     @navbars = {
       newArticle: JST['backbone/templates/navbars/new']
       index: JST['backbone/templates/navbars/index']
@@ -14,7 +13,6 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
     @articles.reset options.articles
 
     EvernoteClone.currentUserId = @readCookie('current_user_id')
-    console.log 'logged in as user ' + EvernoteClone.currentUserId
 
   routes:
     '/new'      : 'newArticle'
@@ -24,14 +22,12 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
     '.*'        : 'index'
 
   newArticle: ->
-    console.log 'routing new'
     $('#custom-nav').html(@navbars.newArticle)
 
     view = new EvernoteClone.Views.Articles.NewView(collection: @articles)
     $('#content').html(view.render().el)
 
   index: ->
-    console.log 'routing index'
     if (EvernoteClone.currentUserId)
       $('#custom-nav').html(@navbars.index)
     else
@@ -41,7 +37,6 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
     $('#content').html(view.render().el)
 
   show: (id) ->
-    console.log 'routing show'
     if (EvernoteClone.currentUserId)
       $('#custom-nav').html(@navbars.show(id: id))
     else
@@ -54,7 +49,6 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
         $('#content').html(view.render().el)
 
   edit: (id) ->
-    console.log 'routing edit'
     $('#custom-nav').html(@navbars.edit(id: id))
 
     article = @articles.get(id)
