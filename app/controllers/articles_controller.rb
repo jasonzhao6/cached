@@ -43,7 +43,7 @@ class ArticlesController < ApplicationController
   def show
     article = Article.find params[:id]
     article.body.gsub! /\sstyle="/, ' data-style="'
-    article.body.gsub! /width="[0-9]{3,}"/, 'width="100%"'
+    article.body.gsub! /width="[3-9][0-9]{2,}"/, 'width="100%"'
     respond_with article
   end
   
