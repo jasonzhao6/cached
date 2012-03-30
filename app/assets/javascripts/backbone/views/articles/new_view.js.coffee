@@ -42,12 +42,12 @@ class EvernoteClone.Views.Articles.NewView extends Backbone.View
       $contentEditable.text('')
 
   beforeSave: ->
-    $('#body').val $("[contenteditable='true']").html()
-    $('#body').change()
+    @$('#body').val $("[contenteditable='true']").html()
+    @$('#body').change()
 
   render: ->
     $(@el).html(@template(@model.toJSON()))
 
-    this.$("form").backboneLink(@model)
+    @$("form").backboneLink(@model)
 
     return this

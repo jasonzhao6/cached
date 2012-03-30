@@ -9,14 +9,14 @@ class EvernoteClone.Views.Articles.IndexView extends Backbone.View
     'submit #search': 'searchFormSubmit'
 
   delayedSearch: ->
-    $clearSearch = $('#clear-search-btn')
+    $clearSearch = @$('#clear-search-btn')
     if typeof (@searchId) is "number"
       clearTimeout @searchId
       @searchId = null
     @searchId = setTimeout(@search, 450)
 
   clearSearch: ->
-    $searchField = $('#search-field')
+    $searchField = @$('#search-field')
     if ($searchField.val().length > 0)
       $searchField.val('')
       @search()
@@ -27,7 +27,7 @@ class EvernoteClone.Views.Articles.IndexView extends Backbone.View
 
   search: =>
     console.log 'searching'
-    $searchField = $('#search-field')
+    $searchField = @$('#search-field')
     $.ajax
       url: "/search?q=" + escape($searchField.val())
       success: (data) =>

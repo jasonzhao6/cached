@@ -33,12 +33,12 @@ class EvernoteClone.Views.Articles.EditView extends Backbone.View
           alert 'Delete was not successful'
 
   beforeSave: ->
-    $('#body').val $("[contenteditable='true']").html()
-    $('#body').change()
+    @$('#body').val $("[contenteditable='true']").html()
+    @$('#body').change()
 
   render: ->
     $(@el).html(@template(@model.toJSON() ))
 
-    this.$('form').backboneLink(@model)
+    @$('form').backboneLink(@model)
 
     return this
