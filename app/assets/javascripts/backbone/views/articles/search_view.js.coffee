@@ -35,7 +35,7 @@ class EvernoteClone.Views.Articles.SearchView extends Backbone.View
       $searchField.val('')
       @search()
 
-  render: =>
+  render: ->
     window.bar = @
     $(@el).html(@template())
 
