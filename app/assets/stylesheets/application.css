@@ -180,6 +180,7 @@ form[name=article] input, [contenteditable='true'] {
 }
 #article-show article pre, #article-show article pre * {
   color: #555;
+  font-size: 15px;
 }
 #article-show article code {
   color: #195F91;
