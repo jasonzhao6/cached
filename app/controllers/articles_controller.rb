@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_filter :authenticated?, except: [:index, :search, :show] # allow anonymous browsing of articles; currently, the only route enabled is '/demo'
   before_filter :inject_current_user_into_params, only: [:create, :update] # enforce correct current user, an alternative could be using mass assignment
+  before_filter :filter_incoming_title_and_body_params, only: [:create, :update] # convert title to titlecase, strip style attributes from body
   respond_to :json, except: :index
   
    # on error, return error message with 400, client should show error message
@@ -42,7 +43,6 @@ class ArticlesController < ApplicationController
   
   def show
     article = Article.find params[:id]
-    article.body.gsub! /\sstyle="/, ' data-style="'
     article.body.gsub! /width="[3-9][0-9]{2,}"/, 'width="100%"'
     respond_with article
   end
@@ -70,6 +70,21 @@ class ArticlesController < ApplicationController
 
   def inject_current_user_into_params
     params['article']['user'] = current_user
+  end
+  
+  def filter_incoming_title_and_body_params
+    params['article']['title'] = params['article']['title'].split(' ').map do |word|
+      if word[1..-1] =~ /[^a-z]/
+        word
+      else
+        word.capitalize
+      end
+    end.join(' ')
+    
+    params['article']['body'].gsub! /\s(data-)?style="[0-9a-zA-Z\-\(\)\/_.,:;!' ]+"/, ''
+    params['article']['body'].gsub! /\sclass="[0-9a-zA-Z\-\(\)\/_.,:;!' ]+"/, ''
+    params['article']['body'].gsub! /\sheight="[0-9a-zA-Z\-\(\)\/_.,:;!' ]+"/, ''
+    params['article']['body'].gsub! /\starget="[0-9a-zA-Z\-\(\)\/_.,:;!' ]+"/, ''
   end
 
 end
