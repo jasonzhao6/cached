@@ -55,6 +55,7 @@ body {
   width: 208px;
 }
 article.well {
+  cursor: pointer;
   font-weight: bold;
 }
 #to-paginate {
