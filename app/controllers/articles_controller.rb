@@ -86,6 +86,7 @@ class ArticlesController < ApplicationController
     params['article']['body'].gsub! /\sclass="#{blah}"/, ''
     params['article']['body'].gsub! /\sheight="#{blah}"/, ''
     params['article']['body'].gsub! /\starget="#{blah}"/, ''
+    params['article']['body'].gsub! /\sdata-[a-z-]+="#{blah}"/, ''
   end
 
 end
