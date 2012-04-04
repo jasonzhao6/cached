@@ -178,6 +178,13 @@ form[name=article] input, [contenteditable='true'] {
   font-size: 17px;
   line-height: 25px;
 }
+#article-show article pre, #article-show article pre * {
+  color: #555;
+}
+#article-show article code {
+  color: #195F91;
+  font-family: Courier, 'Courier New';
+}
 #article-show article h1, #article-show article h2, #article-show article h3, #article-show article h4, #article-show article h5, #article-show article h6 {
   line-height: 24px;
   margin-bottom: 18px;
