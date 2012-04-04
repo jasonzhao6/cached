@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_filter :authenticated?, except: [:index, :search, :show] # allow anonymous browsing of articles; currently, the only route enabled is '/demo'
   before_filter :inject_current_user_into_params, only: [:create, :update] # enforce correct current user, an alternative could be using mass assignment
-  before_filter :filter_incoming_title_and_body_params, only: [:create, :update] # convert title to titlecase, strip style attributes from body
+  before_filter :filter_incoming_title_and_body_params, only: [:create] # convert title to titlecase, strip style attributes from body
   respond_to :json, except: :index
   
    # on error, return error message with 400, client should show error message
@@ -74,7 +74,7 @@ class ArticlesController < ApplicationController
   
   def filter_incoming_title_and_body_params
     params['article']['title'] = params['article']['title'].split(' ').map do |word|
-      if word[1..-1] =~ /[^a-z]/
+      if word[1..-1] =~ /[^a-z']/
         word
       else
         word.capitalize
