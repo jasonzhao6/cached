@@ -42,9 +42,7 @@ class ArticlesController < ApplicationController
   end
   
   def show
-    article = Article.find params[:id]
-    article.body.gsub! /width="[3-9][0-9]{2,}"/, 'width="100%"'
-    respond_with article
+    respond_with Article.find params[:id]
   end
   
   # on error, return error message with 400, client should show error message
@@ -85,6 +83,7 @@ class ArticlesController < ApplicationController
     params['article']['body'].gsub! /\sstyle="#{blah}"/, ''
     params['article']['body'].gsub! /\sclass="#{blah}"/, ''
     params['article']['body'].gsub! /\sheight="#{blah}"/, ''
+    params['article']['body'].gsub! /\swidth="#{blah}"/, ''
     params['article']['body'].gsub! /\starget="#{blah}"/, ''
     params['article']['body'].gsub! /\sdata-[a-z-]+="#{blah}"/, ''
   end
