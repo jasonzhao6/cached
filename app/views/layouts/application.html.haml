@@ -25,6 +25,331 @@
       .row-fluid
         #content
           = yield
-        #to-paginate
+          #to-paginate
+        #more_content
+          %div
+            #article-show
+              %h1 GitHub API v3
+              .seperator
+              %article
+                %h2#schema Schema
+                %p
+                  All API access is over HTTPS, and accessed from the 
+                  %code> api.github.com
+                  \ domain. All data is sent and received as JSON.
+                %pre
+                  :preserve
+                    $ curl -i https://api.github.com
+
+                    HTTP/1.1 302 Found
+                    Server: nginx/1.0.12
+                    Date: Mon, 20 Feb 2012 11:15:49 GMT
+                    Content-Type: text/html;charset=utf-8
+                    Connection: keep-alive
+                    Status: 302 Found
+                    X-RateLimit-Limit: 5000
+                    ETag: "d41d8cd98f00b204e9800998ecf8427e"
+                    Location: http://developer.github.com
+                    X-RateLimit-Remaining: 4999
+                    Content-Length: 0
+
+                %p
+                  Blank fields are included as 
+                  %code> null
+                  \ instead of being omitted.
+                %p All timestamps are returned in ISO 8601 format:
+                %pre
+                  %code
+                    :preserve
+                      YYYY-MM-DDTHH:MM:SSZ
+                %h2#client-errors Client Errors
+                %p There are three possible types of client errors on API calls that receive request bodies:
+                %ol
+                  %li
+                    %p
+                      Sending invalid JSON will result in a 
+                      %code> 400 Bad Request
+                      \ response.
+                    %pre
+                      %code
+                        :preserve
+                           HTTP/1.1 400 Bad Request
+                           Content-Length: 35
+
+                           {"message":"Problems parsing JSON"}
+                  %li
+                    %p
+                      Sending the wrong type of JSON values will result in a 
+                      %code> 400 Bad Request
+                      \ response.
+                    %pre
+                      %code
+                        :preserve
+                           HTTP/1.1 400 Bad Request
+                           Content-Length: 40
+
+                           {"message":"Body should be a JSON Hash"}
+                  %li
+                    %p Sending invalid files will result in a 422 Unprocessable Entity response.
+                    %pre
+                      %code
+                        :preserve
+                           HTTP/1.1 422 Unprocessable Entity
+                           Content-Length: 149
+
+                           {
+                             "message": "Validation Failed",
+                             "errors": [
+                               {
+                                 "resource": "Issue",
+                                 "field": "title",
+                                 "code": "missing_field"
+                               }
+                             ]
+                           }
+                %p All error objects have resource and field properties so that your client can tell what the problem is. There’s also an error code to let you know what is wrong with the field. These are the possible validation error codes:
+                %dl
+                  %dt missing
+                  %dd This means a resource does not exist.
+                  %dt missing_field
+                  %dd This means a required field on a resource has not been set.
+                  %dt invalid
+                  %dd This means the formatting of a field is invalid. The documentation for that resource should be able to give you more specific information.
+                  %dt already_exists
+                  %dd This means another resource has the same value as this field. This can happen in resources that must have some unique key (such as Label names).
+                %p If resources have custom validation errors, they will be documented with the resource.
+                %h2#http-verbs HTTP Verbs
+                %p Where possible, API v3 strives to use appropriate HTTP verbs for each action.
+                %dl
+                  %dt HEAD
+                  %dd Can be issued against any resource to get just the HTTP header info.
+                  %dt GET
+                  %dd Used for retrieving resources.
+                  %dt POST
+                  %dd Used for creating resources, or performing custom actions (such as merging a pull request).
+                  %dt PATCH
+                  %dd
+                    Used for updating resources with partial JSON data. For instance, an Issue resource has 
+                    %code> title
+                    \ and 
+                    %code> body
+                    \ attributes. A PATCH request may accept one or more of the attributes to update the resource. PATCH is a relatively new and uncommon HTTP verb, so resource endpoints also accept POST requests.
+                  %dt PUT
+                  %dd
+                    Used for replacing resources or collections. For PUT requests with no 
+                    %code> body
+                    \ attribute, be sure to set the 
+                    %code> Content-Length
+                    \ header to zero.
+                  %dt DELETE
+                  %dd Used for deleting resources.
+                %h2#authentication Authentication
+                %p There are two ways to authenticate through GitHub API v3:
+                %p Basic Authentication:
+                %pre
+                  :preserve
+                    $ curl -u "username:PASSWORD" https://api.github.com
+                %p OAuth2 Token (sent in a header):
+                %pre
+                  :preserve
+                    $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com
+                %p OAuth2 Token (sent as a parameter):
+                %pre
+                  :preserve
+                    $ curl https://api.github.com?access_token=OAUTH-TOKEN
+                %p
+                  Read 
+                  %a{:href => "http://developer.github.com/v3/oauth/"}> more about OAuth2
+                  \. Note that OAuth2 tokens can be 
+                  %a{:href => "http://developer.github.com/v3/oauth/#create-a-new-authorization"}> acquired programmatically
+                  , for applications that are not websites.
+                %h2#pagination Pagination
+                %p
+                  Requests that return multiple items will be paginated to 30 items by default. You can specify further pages with the 
+                  %code> ?page
+                  \ parameter. You can also set a custom page size up to 100 with the 
+                  %code> ?per_page
+                  \ parameter.
+                %pre
+                  :preserve
+                    $ curl https://api.github.com/repos?page=2&per_page=100
+                %p
+                  The pagination info is included in 
+                  %a{:href => "http://www.w3.org/Protocols/9707-link-header.html"}> the Link header
+                  \:
+                %pre
+                  %code
+                    :preserve
+                      Link: <https://api.github.com/repos?page=3&per_page=100>; rel="next",
+                        <https://api.github.com/repos?page=50&per_page=100>; rel="last"
+                %p
+                  %em Linebreak is included for readability.
+                %p
+                  The possible 
+                  %code> rel
+                  \ values are:
+                %dl
+                  %dt
+                    %code next
+                  %dd Shows the URL of the immediate next page of results.
+                  %dt
+                    %code last
+                  %dd Shows the URL of the last page of results.
+                  %dt
+                    %code first
+                  %dd Shows the URL of the first page of results.
+                  %dt
+                    %code prev
+                  %dd Shows the URL of the immediate previous page of results.
+                %h2#rate-limiting Rate Limiting
+                %p We limit requests to API v3 to 5000 per hour. This is keyed off either your login, your OAuth token, or request IP. You can check the returned HTTP headers of any API request to see your current status:
+                %pre
+                  :preserve
+                    $ curl -i https://api.github.com/users/whatever
+
+                    HTTP/1.1 200 OK
+                    Status: 200 OK
+                    X-RateLimit-Limit: 5000
+                    X-RateLimit-Remaining: 4966
+                %p
+                  You can 
+                  %a{:href => "https://github.com/contact"}> contact us
+                  \ to request white listed access for your application. We prefer sites that setup OAuth applications for their users.
+                %h2#cross-origin-resource-sharing Cross Origin Resource Sharing
+                %p
+                  The API supports Cross Origin Resource Sharing (CORS) for AJAX requests. you can read the
+                  %a{:href => "http://www.w3.org/TR/cors"}> CORS W3C working draft
+                  , or 
+                  %a{:href => "http://code.google.com/p/html5security/wiki/CrossOriginRequestSecurity"}> this intro
+                  \ from the HTML 5 Security Guide.
+                %p
+                  Here’s a sample request sent from a browser hitting 
+                  %code> http://some-site.com
+                  \:
+                %pre
+                  %code
+                    :preserve
+                      $ curl -i https://api.github.com -H "Origin: http://some-site.com" 
+                      HTTP/1.1 302 Found
+                %p
+                  Any domain that is registered as an OAuth Application is accepted. Here’s a sample request for a browser hitting 
+                  %a{:href => "http://calendaraboutnothing.com/"}> Calendar About Nothing
+                  \:
+                %pre
+                  %code
+                    :preserve
+                      $ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com" 
+                      HTTP/1.1 302 Found
+                      Access-Control-Allow-Origin: http://calendaraboutnothing.com
+                      Access-Control-Expose-Headers: Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
+                      Access-Control-Allow-Credentials: true
+                %p This is what the CORS preflight request looks like:
+                %pre
+                  %code
+                    :preserve
+                      $ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com" -X OPTIONS    
+                      HTTP/1.1 204 No Content
+                      Access-Control-Allow-Origin: http://calendaraboutnothing.com
+                      Access-Control-Allow-Headers: Authorization, X-Requested-With
+                      Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE
+                      Access-Control-Expose-Headers: Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
+                      Access-Control-Max-Age: 86400
+                      Access-Control-Allow-Credentials: true
+                %h2#json-p-callbacks JSON-P Callbacks
+                %p
+                  You can send a 
+                  %code> ?callback
+                  \ parameter to any GET call to have the results wrapped in a JSON function. This is typically used when browsers want to embed GitHub content in web pages by getting around cross domain issues. The response includes the same data output as the regular API, plus the relevant HTTP Header information.
+                %pre
+                  :preserve
+                    $ curl https://api.github.com?callback=foo
+
+                    foo({
+                      "meta": {
+                        "status": 200,
+                        "X-RateLimit-Limit": "5000",
+                        "X-RateLimit-Remaining": "4966",
+                        "Link": [ // pagination headers and other links
+                          ["https://api.github.com?page=2", {"rel": "next"}]
+                        ]
+                      },
+                      "data": {
+                        // the data
+                      }
+                    })
+                %p You can write a javascript handler to process the callback like this:
+                %pre
+                  %code
+                    %span function
+                    %span foo
+                    %span (
+                    %span response
+                    %span )
+                    %span {
+                    %span var
+                    %span meta
+                    %span =
+                    %span response
+                    %span .
+                    %span meta
+                    %span var
+                    %span data
+                    %span =
+                    %span response
+                    %span .
+                    %span data
+                    %span console
+                    %span .
+                    %span log
+                    %span (
+                    %span meta
+                    %span )
+                    %span console
+                    %span .
+                    %span log
+                    %span (
+                    %span data
+                    %span )
+                    %span }
+                %p
+                  All of the headers are the same String value as the HTTP Headers with one notable exception: Link. Link headers are pre-parsed for you and come through as an array of 
+                  %code> [url, options]
+                  tuples.
+                %p A link that looks like this:
+                %pre
+                  %code
+                    :preserve
+                      Link: <url1>; rel="next", <url2>; rel="foo"; bar="baz"
+                %p … will look like this in the Callback output:
+                %pre
+                  %code
+                    %span {
+                    %span "Link"
+                    %span :
+                    %span [
+                    %span [
+                    %span "url1"
+                    %span ,
+                    %span {
+                    %span "rel"
+                    %span :
+                    %span "next"
+                    %span }
+                    %span ],
+                    %span [
+                    %span "url2"
+                    %span ,
+                    %span {
+                    %span "rel"
+                    %span :
+                    %span "foo"
+                    %span ,
+                    %span "bar"
+                    %span :
+                    %span "baz"
+                    %span }
+                    %span ]
+                    %span ]
+                    %span }
     = javascript_include_tag "application"
     = yield :page_specific_javascript

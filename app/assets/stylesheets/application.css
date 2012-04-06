@@ -9,8 +9,16 @@
 /*--------*/
 /* Layout */
 /*--------*/
-body {
-  max-width: 500px;
+@media only screen and (min-width: 768px) {
+
+  #content {
+    float: left;
+    max-width: 384px;
+  }
+  #more_content {
+    margin-left: 389px;
+  }
+
 }
 
 /*-------*/
