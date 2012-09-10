@@ -1,6 +1,6 @@
-EvernoteClone.Views.Articles ||= {}
+Cached.Views.Articles ||= {}
 
-class EvernoteClone.Views.Articles.IndexView extends Backbone.View
+class Cached.Views.Articles.IndexView extends Backbone.View
   template: JST["backbone/templates/articles/index"]
 
   initialize: () ->
@@ -9,15 +9,15 @@ class EvernoteClone.Views.Articles.IndexView extends Backbone.View
   addArticles: (articles) ->
     i = articles.length
     while i > 0
-      view = new EvernoteClone.Views.Articles.ArticleView({model : articles.at(i - 1)})
+      view = new Cached.Views.Articles.ArticleView({model : articles.at(i - 1)})
       @$("#articles-table").append(view.render().el)
       i--
 
   addSearchBindingAndUI: ->
-    searchView = new EvernoteClone.Views.Articles.SearchView()
+    searchView = new Cached.Views.Articles.SearchView()
 
     searchView.on 'search:success', =>
-      articles = new EvernoteClone.Collections.ArticlesCollection()
+      articles = new Cached.Collections.ArticlesCollection()
       articles.reset searchView.searchResult
       @$('#articles-table').html('')
       @addArticles articles

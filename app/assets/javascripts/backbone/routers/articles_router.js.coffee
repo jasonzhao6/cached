@@ -1,4 +1,4 @@
-class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
+class Cached.Routers.ArticlesRouter extends Backbone.Router
   initialize: (options) ->
     @navbars = {
       newArticle: JST['backbone/templates/navbars/new']
@@ -9,10 +9,10 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
       edit: JST['backbone/templates/navbars/edit']
     }
 
-    @articles = new EvernoteClone.Collections.ArticlesCollection()
+    @articles = new Cached.Collections.ArticlesCollection()
     @articles.reset options.articles
 
-    EvernoteClone.currentUserId = @readCookie('current_user_id')
+    Cached.currentUserId = @readCookie('current_user_id')
 
   routes:
     '/new'      : 'newArticle'
@@ -24,20 +24,20 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
   newArticle: ->
     $('#custom-nav').html(@navbars.newArticle)
 
-    view = new EvernoteClone.Views.Articles.NewView(collection: @articles)
+    view = new Cached.Views.Articles.NewView(collection: @articles)
     $('#content').html(view.render().el)
 
   index: ->
-    if (EvernoteClone.currentUserId)
+    if (Cached.currentUserId)
       $('#custom-nav').html(@navbars.index)
     else
       $('#custom-nav').html(@navbars.indexDemo)
 
-    view = new EvernoteClone.Views.Articles.IndexView(articles: @articles)
+    view = new Cached.Views.Articles.IndexView(articles: @articles)
     $('#content').html(view.render().el)
 
   show: (id) ->
-    if (EvernoteClone.currentUserId)
+    if (Cached.currentUserId)
       $('#custom-nav').html(@navbars.show(id: id))
     else
       $('#custom-nav').html(@navbars.showDemo)
@@ -45,7 +45,7 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
     article = @articles.get(id)
     article.fetch
       success: ->
-        view = new EvernoteClone.Views.Articles.ShowView(model: article)
+        view = new Cached.Views.Articles.ShowView(model: article)
         $('#content').html(view.render().el)
         $('body').scrollTop(0)
 
@@ -55,7 +55,7 @@ class EvernoteClone.Routers.ArticlesRouter extends Backbone.Router
     article = @articles.get(id)
     article.fetch
       success: ->
-        view = new EvernoteClone.Views.Articles.EditView(model: article)
+        view = new Cached.Views.Articles.EditView(model: article)
         $('#content').html(view.render().el)
 
   # HELPER METHODS

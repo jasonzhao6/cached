@@ -11,7 +11,7 @@
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
-//= require backbone/evernote_clone
+//= require backbone/cached
 //= require_tree .
 
 // Url bar hiding

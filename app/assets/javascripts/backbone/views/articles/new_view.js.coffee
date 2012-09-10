@@ -1,6 +1,6 @@
-EvernoteClone.Views.Articles ||= {}
+Cached.Views.Articles ||= {}
 
-class EvernoteClone.Views.Articles.NewView extends Backbone.View
+class Cached.Views.Articles.NewView extends Backbone.View
   template: JST["backbone/templates/articles/new"]
 
   events:

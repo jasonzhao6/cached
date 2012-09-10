@@ -1,1 +1,1 @@
-rvm use 1.9.3@evernote-clone --create
+rvm use 1.9.3@cached --create

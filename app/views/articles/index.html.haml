@@ -1,6 +1,6 @@
 - content_for :page_specific_javascript do
   :javascript
     $(function() {
-      window.router = new EvernoteClone.Routers.ArticlesRouter({articles: #{@articles.to_json.html_safe}});
+      window.router = new Cached.Routers.ArticlesRouter({articles: #{@articles.to_json.html_safe}});
       Backbone.history.start();
     });

@@ -15,9 +15,9 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: evernote_clone_development
+  database: cached_development
   pool: 5
-  username: _postgres
+  username: postgres
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -41,15 +41,15 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: evernote_clone_test
+  database: cached_test
   pool: 5
-  username: _postgres
+  username: postgres
   password:
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: evernote_clone_production
+  database: cached_production
   pool: 5
-  username: _postgres
+  username: postgres
   password:

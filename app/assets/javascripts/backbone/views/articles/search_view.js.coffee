@@ -1,6 +1,6 @@
-EvernoteClone.Views.Articles ||= {}
+Cached.Views.Articles ||= {}
 
-class EvernoteClone.Views.Articles.SearchView extends Backbone.View
+class Cached.Views.Articles.SearchView extends Backbone.View
   template: JST["backbone/templates/articles/search"]
 
   events:
