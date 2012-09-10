@@ -33,6 +33,6 @@ class Cached.Views.Articles.IndexView extends Backbone.View
 
     @addArticles @options.articles
     
-    @addSearchBindingAndUI()
+    # @addSearchBindingAndUI()
 
     return this
