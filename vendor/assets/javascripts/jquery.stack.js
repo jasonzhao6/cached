@@ -22,6 +22,7 @@
               })
               columnHeights[columnIndex] += $child.height();
             });
+            $parent.height(Math.max.apply(this, columnHeights));
           },
           resetcolumnHeights = function() {
             $.each(columnHeights, function(i){
