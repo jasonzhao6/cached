@@ -18,6 +18,7 @@ body {
 /*-------*/
 #login-container {
   margin: 30px auto 100px;
+  max-width: 380px;
   width: 80%;
 }
 #login-container h1 {
@@ -50,32 +51,41 @@ body {
 /*-------*/
 /* Index */
 /*-------*/
-#search-field {
+#articles-table {
+  padding-left: 8px;
+}
+#articles-table #search-field {
   font-weight: bold;
   width: 208px;
 }
-article.well {
+#articles-table .two-column {
+  border-right: 8px solid transparent;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 50%;
+}
+#articles-table a.well, #articles-table a.well:hover {
+  color: #333;
   cursor: pointer;
+  display: block;
   font-weight: bold;
+  text-decoration: none;
 }
 
-/*-------------*/
-/* New article */
+/*--------------*/
+/* New article  */
 /* Edit article */
 /*--------------*/
-form[name=article] input, [contenteditable='true'] {
+form[name=article] {
+  padding: 0 8px;
+}
+form[name=article] input, form[name=article] [contenteditable='true'] {
   color: #222;
   margin: 5px 0 0;
 }
-.placeholder {
-  color: #999;
-  position: absolute;
-}
-#delete-btn {
-  font-weight: bold;
-  width: 100%;
-}
-[contenteditable='true'] {
+form[name=article] [contenteditable='true'] {
   border: 1px solid #75B9F0;
   border-radius: 3px;
   -webkit-box-shadow: 0px 0px 8px 0px #75B9F0;
@@ -86,28 +96,39 @@ form[name=article] input, [contenteditable='true'] {
   outline: 0;
   padding: 6px 20px 6px 10px;
 }
-[contenteditable='true']:not(:focus) {
+form[name=article] [contenteditable='true']:not(:focus) {
   border: 1px solid #ccc;
   -webkit-box-shadow: inset 0px 0px 5px 0px #ddd;
   -moz-box-shadow: inset 0px 0px 5px 0px #ddd;
   box-shadow: inset 0px 0px 5px 0px #ddd;
 }
-@media handheld, only screen and (max-width: 500px) {
-  [contenteditable='true'] {
-    -webkit-box-shadow: inset 0px 2px 2px 0px #ccc;
-    -moz-box-shadow: inset 0px 2px 2px 0px #ccc;
-    box-shadow: inset 0px 2px 2px 0px #ccc;
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) { /* match contenteditable shadow with iOS input shadow */
+  form[name=article] [contenteditable='true'] {
+    -webkit-box-shadow: inset 0px 2px 2px 0px #ddd;
+    -moz-box-shadow: inset 0px 2px 2px 0px #ddd;
+    box-shadow: inset 0px 2px 2px 0px #ddd;
   }
-  [contenteditable='true']:not(:focus) {
-    -webkit-box-shadow: inset 0px 2px 2px 0px #ccc;
-    -moz-box-shadow: inset 0px 2px 2px 0px #ccc;
-    box-shadow: inset 0px 2px 2px 0px #ccc;
+  form[name=article] [contenteditable='true']:not(:focus) {
+    -webkit-box-shadow: inset 0px 2px 2px 0px #ddd;
+    -moz-box-shadow: inset 0px 2px 2px 0px #ddd;
+    box-shadow: inset 0px 2px 2px 0px #ddd;
   }
+}
+form[name=article] .placeholder {
+  color: #999;
+  position: absolute;
+}
+#delete-btn {
+  font-weight: bold;
+  width: 100%;
 }
 
 /*--------------*/
 /* Show article */
 /*--------------*/
+#article-show {
+  padding: 0 8px;
+}
 #article-show h1, #article-show .seperator, #article-show article {
   margin: 0 6px;
 }
