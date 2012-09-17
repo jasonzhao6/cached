@@ -73,6 +73,7 @@ body {
   display: block;
   font-weight: bold;
   text-decoration: none;
+  word-wrap: break-word;
 }
 
 /*--------------*/
