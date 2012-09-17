@@ -35,6 +35,7 @@ class Cached.Routers.ArticlesRouter extends Backbone.Router
 
     view = new Cached.Views.Articles.IndexView(articles: @articles)
     $('#content').html(view.render().el)
+    $('#articles-table').stack();
 
   show: (id) ->
     if (Cached.currentUserId)

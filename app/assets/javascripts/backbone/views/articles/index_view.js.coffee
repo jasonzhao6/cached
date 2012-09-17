@@ -3,9 +3,6 @@ Cached.Views.Articles ||= {}
 class Cached.Views.Articles.IndexView extends Backbone.View
   template: JST["backbone/templates/articles/index"]
 
-  initialize: () ->
-    @options.articles.bind('reset', @addArticles) # do i need this?
-
   addArticles: (articles) ->
     i = articles.length
     while i > 0
@@ -29,10 +26,7 @@ class Cached.Views.Articles.IndexView extends Backbone.View
     $(@el).prepend(searchView.render().el)
 
   render: ->
-    $(@el).html(@template(articles: @options.articles.toJSON()))
-
+    $(@el).html(@template())
     @addArticles @options.articles
-    
     # @addSearchBindingAndUI()
-
-    return this
+    @

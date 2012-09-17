@@ -52,7 +52,8 @@ body {
 /* Index */
 /*-------*/
 #articles-table {
-  padding-left: 8px;
+  padding: 0 0 5px 8px;
+  position: relative;
 }
 #articles-table #search-field {
   font-weight: bold;
@@ -78,14 +79,14 @@ body {
 /* New article  */
 /* Edit article */
 /*--------------*/
-form[name=article] {
+#new-article, #edit-article {
   padding: 0 8px;
 }
-form[name=article] input, form[name=article] [contenteditable='true'] {
+#new-article input, #edit-article input, [contenteditable='true'] {
   color: #222;
   margin: 5px 0 0;
 }
-form[name=article] [contenteditable='true'] {
+[contenteditable='true'] {
   border: 1px solid #75B9F0;
   border-radius: 3px;
   -webkit-box-shadow: 0px 0px 8px 0px #75B9F0;
@@ -96,25 +97,25 @@ form[name=article] [contenteditable='true'] {
   outline: 0;
   padding: 6px 20px 6px 10px;
 }
-form[name=article] [contenteditable='true']:not(:focus) {
+[contenteditable='true']:not(:focus) {
   border: 1px solid #ccc;
   -webkit-box-shadow: inset 0px 0px 5px 0px #ddd;
   -moz-box-shadow: inset 0px 0px 5px 0px #ddd;
   box-shadow: inset 0px 0px 5px 0px #ddd;
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) { /* match contenteditable shadow with iOS input shadow */
-  form[name=article] [contenteditable='true'] {
+  [contenteditable='true'] {
     -webkit-box-shadow: inset 0px 2px 2px 0px #ddd;
     -moz-box-shadow: inset 0px 2px 2px 0px #ddd;
     box-shadow: inset 0px 2px 2px 0px #ddd;
   }
-  form[name=article] [contenteditable='true']:not(:focus) {
+  [contenteditable='true']:not(:focus) {
     -webkit-box-shadow: inset 0px 2px 2px 0px #ddd;
     -moz-box-shadow: inset 0px 2px 2px 0px #ddd;
     box-shadow: inset 0px 2px 2px 0px #ddd;
   }
 }
-form[name=article] .placeholder {
+#new-article .placeholder {
   color: #999;
   position: absolute;
 }

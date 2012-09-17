@@ -36,5 +36,4 @@ class Cached.Views.Articles.SearchView extends Backbone.View
 
   render: ->
     $(@el).html(@template())
-
-    return this
+    @

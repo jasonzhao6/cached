@@ -14,5 +14,4 @@ class Cached.Views.Articles.ArticleView extends Backbone.View
 
   render: ->
     $(@el).html(@template(@model.toJSON()))
-
-    return this
+    @

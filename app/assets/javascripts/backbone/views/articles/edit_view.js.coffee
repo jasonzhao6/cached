@@ -13,10 +13,8 @@ class Cached.Views.Articles.EditView extends Backbone.View
 
     @beforeSave()
     @model.save(null,
-      success: (article) =>
-        @model = article
+      success: =>
         window.location.hash = "/#{@model.id}"
-
       error: (article, jqXHR) =>
         alert jqXHR.responseText
     )
@@ -25,17 +23,15 @@ class Cached.Views.Articles.EditView extends Backbone.View
     if (confirm 'Are you sure you want to delete?')
       @model.destroy
         success: ->
-          window.location.hash = "/index"
+          window.location.hash = '/index'
         error: ->
           alert 'Delete was not successful'
 
   beforeSave: ->
     @$('#body').val $("[contenteditable='true']").html()
-    @$('#body').change()
+    @$('#body').change() # trigger backbone link
 
   render: ->
     $(@el).html(@template(@model.toJSON()))
-
     @$('form').backboneLink(@model)
-
-    return this
+    @
