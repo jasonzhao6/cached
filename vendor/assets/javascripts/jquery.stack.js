@@ -3,7 +3,7 @@
   $.fn.extend({
     stack: function() {
       var $parent = $(this),
-          parentWidth = $parent.width(),
+          parentWidth = $parent.width() + $parent.width() % 2,
           parentLeftPadding = parseInt($parent.css('padding-left'))
           $children = $parent.children(),
           childrenWidth = $children.outerWidth(),
@@ -22,7 +22,7 @@
               })
               columnHeights[columnIndex] += $child.height();
             });
-            $parent.height(Math.max.apply(this, columnHeights));
+            $parent.height(Math.max.apply(null, columnHeights));
           },
           resetcolumnHeights = function() {
             $.each(columnHeights, function(i){
